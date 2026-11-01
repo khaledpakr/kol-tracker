@@ -1,23 +1,21 @@
 [
  {
-  "wallet": "slingoor",
-  "error": "time_budget_partial",
-  "remaining": 331
+  "type": "BUY",
+  "mint": "FEoRALCYohXj47mCr71mA5f82YMk5GLytEFetZZpump",
+  "tokens": 24704206.596837,
+  "sol": 2.01651884,
+  "pre": 0,
+  "post": 24704206.596837,
+  "wallet": "decu",
+  "sig": "2h9XScMfaWvz4YxDjFMQgvcHpBsZJygepU7FFTnW9ezomUfzeVzzGtVegmVYQqcsXQtaj43Fp1uKRq76PTc7r5vD",
+  "time": 1793543232
  },
  {
-  "wallet": "Gfree",
+  "wallet": "trunoest",
   "error": "time_budget_skipped"
  },
  {
-  "wallet": "POORGOAT___",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "marcell",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "cwuhn4",
+  "wallet": "theo",
   "error": "time_budget_skipped"
  }
 ]
