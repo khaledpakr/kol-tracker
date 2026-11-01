@@ -62,4 +62,13 @@ if(!F){$("#app").innerHTML=`<p class=muted style="padding:60px;text-align:center
 const y=scrollY;$("#app").innerHTML=(V[r]||V.home)(decodeURIComponent(a||""));scrollTo(0,y)}
 
 addEventListener("hashchange",()=>{render();scrollTo(0,0);});
-(async()=>{render();await loadFeed();render();loadCoins();setInterval(async()=>{await loadFeed();render()},30000);setInterval(loadCoins,45000)})();
+async function countVisit(){
+  try{
+    const r=await fetch("https://abacus.jasoncameron.dev/hit/kol-tracker/visits");
+    if(!r.ok) return;
+    const d=await r.json();
+    const el=$("#visits");
+    if(el && d.value!=null){el.hidden=false;el.textContent=" · "+d.value+" visits"}
+  }catch(e){console.warn("visits",e)}
+}
+(async()=>{render();countVisit();await loadFeed();render();loadCoins();setInterval(async()=>{await loadFeed();render()},30000);setInterval(loadCoins,45000)})();
