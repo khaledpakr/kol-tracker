@@ -4,9 +4,6 @@ on:
   schedule:
     - cron: '*/10 * * * *'
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -50,10 +47,3 @@ jobs:
             git commit -m "Update feed and tracker state"
             git push origin HEAD
           fi
-
-      - name: Request GitHub Pages rebuild
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api --method POST -H "Accept: application/vnd.github+json" "/repos/${{ github.repository }}/pages/builds"
