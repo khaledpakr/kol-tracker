@@ -7,9 +7,9 @@ DATA = os.path.join(ROOT, "data")
 HIST = os.path.join(DATA, "trades_history.json"); CACHE = os.path.join(DATA, "token_cache.json")
 STATE = os.path.join(DATA, "slingoor_state.json")
 FEED = os.path.join(ROOT, "feed.json")
-TRACKED = {"slingoor":"5YRgrP3mjGzrzirYYN5HAQH19cTYREYwGxW6XRJQUzij","Gfree":"4yo9CUuTBbds9NFhZd4MzPiZZkUvveXdTnAH8qMsE8ku",
- "POORGOAT___":"8k1sAmVUjzaZkxqexeYkCPphjcQobYugQeGmCyvKtHNG","marcell":"6vbrTLsWy76TxDQAUKLqZrPohQuq6EVaJgfGzR82paFa",
- "cwuhn4":"CwUHN4zTn5wiEYoZjsP4FrDvAT9heDWewCTQjhgwhJqS"}
+CALLERS = json.load(open(os.path.join(ROOT, "config", "callers.json")))["callers"]
+TRACKED = {c["name"]: c["address"] for c in CALLERS}
+XLINK = {c["name"]: c.get("x") for c in CALLERS}
 def lj(p, d):
     try: return json.load(open(p))
     except Exception: return d
@@ -103,7 +103,7 @@ def main():
               tokens=p.get("tokens"), entry_time=p.get("entry_time"), mc=c.get("mc"), liq=c.get("liq"), chg24=c.get("chg24"),
               value_sol=round(val, 4) if val is not None else None, unrealized_sol=round(val - p.get("sol", 0), 4) if val is not None else None))
         pos.sort(key=lambda x: -x["sol_cost"]); mine = [t for t in trades if t["wallet"] == n]
-        callers.append(dict(name=n, address=addr, x=f"https://x.com/search?q={n}", baseline_at=s.get("baseline_at"), positions=pos,
+        callers.append(dict(name=n, address=addr, x=XLINK.get(n) or f"https://x.com/search?q={n}", baseline_at=s.get("baseline_at"), positions=pos,
           open_positions=len(pos), sol_in_open=round(sum(p["sol_cost"] for p in pos), 3),
           unrealized_sol=round(sum(p["unrealized_sol"] or 0 for p in pos), 3), trades=len(mine),
           buys=sum(t["side"] == "BUY" for t in mine), sells=sum(t["side"] == "SELL" for t in mine),

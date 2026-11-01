@@ -27,8 +27,10 @@ def fetch_sigs(addr,until):
     return out,len(out)>=SIG_CAP
 def gettx(sig):
     return rpc("getTransaction",[sig,{"encoding":"jsonParsed","maxSupportedTransactionVersion":1}])
-# PAUSED (user request 2026-10-17, bestcook-only): {"slingoor":"5YRgrP3mjGzrzirYYN5HAQH19cTYREYwGxW6XRJQUzij","Gfree":"4yo9CUuTBbds9NFhZd4MzPiZZkUvveXdTnAH8qMsE8ku","POORGOAT___":"8k1sAmVUjzaZkxqexeYkCPphjcQobYugQeGmCyvKtHNG","marcell":"6vbrTLsWy76TxDQAUKLqZrPohQuq6EVaJgfGzR82paFa","cwuhn4":"CwUHN4zTn5wiEYoZjsP4FrDvAT9heDWewCTQjhgwhJqS","cupsey":"6DQAGJT7VZPVBsuG4kn3AvpyHCEi7B2RFFvMZdbqQqqP"}
-WALLETS={"slingoor":"5YRgrP3mjGzrzirYYN5HAQH19cTYREYwGxW6XRJQUzij","Gfree":"4yo9CUuTBbds9NFhZd4MzPiZZkUvveXdTnAH8qMsE8ku","POORGOAT___":"8k1sAmVUjzaZkxqexeYkCPphjcQobYugQeGmCyvKtHNG","marcell":"6vbrTLsWy76TxDQAUKLqZrPohQuq6EVaJgfGzR82paFa","cwuhn4":"CwUHN4zTn5wiEYoZjsP4FrDvAT9heDWewCTQjhgwhJqS"}
+def load_wallets():
+    cfg=json.load(open(os.path.join(ROOT,"config","callers.json")))
+    return {c["name"]:c["address"] for c in cfg["callers"]}
+WALLETS=load_wallets()
 IGNORE={"So11111111111111111111111111111111111111112","EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v","EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v","Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}
 def rpc(method,params):
     for attempt in range(6):
