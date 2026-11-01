@@ -2,7 +2,7 @@
 
 English-only pump.fun KOL tracker. The site files live at the repository root. `.github/workflows/update.yml` refreshes `feed.json` and `data/` every 10 minutes.
 
-Live site: https://khaledpakr.github.io/kol-tracker/
+Live site: https://kol-tracker.com/
 
 ## Enable GitHub Pages
 
