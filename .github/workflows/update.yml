@@ -5,6 +5,8 @@ on:
     # Offset from the top of the hour. GitHub drops scheduled runs under load at :00.
     - cron: '3-58/5 * * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: write
