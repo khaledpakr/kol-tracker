@@ -65,9 +65,12 @@ function miniX(url){return url?`<a class="xicon" href="${esc(url)}" target=_blan
 function pnlCard(c){
   const b=(c.periods&&c.periods[pnlDay])||{};
   const cls=pnlCls(b);
-  return`<article class="glass pnl-card"><div class=pnl-top><div class=coin><span class=av>${esc((c.name||"?")[0])}</span><div><a href="#/caller/${esc(c.name)}"><b>${esc(c.name)}</b></a><div class=addr>${short(c.address)}</div></div></div>${miniX(c.x)}</div>
+  const trades=(b.wins||0)+(b.losses||0);
+  const head=`<div class=pnl-top><div class=coin><span class=av>${esc((c.name||"?")[0])}</span><div><a href="#/caller/${esc(c.name)}"><b>${esc(c.name)}</b></a><div class=addr>${short(c.address)}</div></div></div>${miniX(c.x)}</div>`;
+  if(!trades)return`<article class="glass pnl-card">${head}<div class="pnl-none">No trades</div></article>`;
+  return`<article class="glass pnl-card">${head}
 <div class="pnl-big ${cls}">${sUsd(b.net_usd||0)}</div><div class="${cls} pnl-sol">${sSol(b.net_sol||0)}</div>
-<div class=kv><div><span>Won</span><b class=up>${sUsd(b.won_usd||0)}</b><b class=up>${sSol(b.won_sol||0)}</b></div><div><span>Lost</span><b class=dn>${b.lost_usd?"-"+usd(b.lost_usd):"$0.00"}</b><b class=dn>${b.lost_sol?"-"+((b.lost_sol<100?b.lost_sol.toFixed(2):fm(b.lost_sol))+" SOL"):"0.00 SOL"}</b></div><div><span>Trades</span><b>${b.wins||0}W · ${b.losses||0}L</b></div></div>
+<div class=kv><div><span>Won</span><b class="up pnl-line">${sUsd(b.won_usd||0)}</b><b class="up pnl-line">${sSol(b.won_sol||0)}</b></div><div><span>Lost</span><b class="dn pnl-line">${b.lost_usd?"-"+usd(b.lost_usd):"$0.00"}</b><b class="dn pnl-line">${b.lost_sol?"-"+(b.lost_sol<100?b.lost_sol.toFixed(2):fm(b.lost_sol))+" SOL":"0.00 SOL"}</b></div><div><span>Trades</span><b class=pnl-line>${b.wins||0}W</b><b class=pnl-line>${b.losses||0}L</b></div></div>
 <div class=thumb><canvas data-series="${esc(JSON.stringify(c.series||[]))}"></canvas></div></article>`}
 function pnlHome(){
   const days=[["today","Today"],["yesterday","Yesterday"],["day_before","Day before"]];
@@ -82,7 +85,9 @@ function pnlTable(title,key,sub){
   const names=(P&&P.boards&&P.boards[key])||[];
   const by=Object.fromEntries((P.callers||[]).map(c=>[c.name,c]));
   const rows=names.map((n,i)=>{const c=by[n]||{name:n,periods:{}};const b=c.periods[key]||{};const cls=pnlCls(b);
-    return`<tr><td class="rank r${i+1}">${i+1}</td><td><div class=coin><span class=av>${esc((n||"?")[0])}</span><a href="#/caller/${esc(n)}"><b>${esc(n)}</b></a></div></td><td class="${cls}"><b>${sUsd(b.net_usd||0)}</b><div class=addr>${sSol(b.net_sol||0)}</div></td><td class="up hide-m">${sUsd(b.won_usd||0)}</td><td class="dn hide-m">${sUsd(b.lost_usd||0)}</td><td>${b.wins||0}W · ${b.losses||0}L</td><td>${miniX(c.x)}</td></tr>`}).join("");
+    const trades=(b.wins||0)+(b.losses||0);
+    const net=trades?`<b>${sUsd(b.net_usd||0)}</b><div class=addr>${sSol(b.net_sol||0)}</div>`:`<span class=muted>No trades</span>`;
+    return`<tr><td class="rank r${i+1}">${i+1}</td><td><div class=coin><span class=av>${esc((n||"?")[0])}</span><a href="#/caller/${esc(n)}"><b>${esc(n)}</b></a></div></td><td class="${cls}">${net}</td><td class="up hide-m">${trades?sUsd(b.won_usd||0):"—"}</td><td class="dn hide-m">${trades?sUsd(b.lost_usd||0):"—"}</td><td>${trades?`${b.wins||0}W · ${b.losses||0}L`:"—"}</td><td>${miniX(c.x)}</td></tr>`}).join("");
   const vals=names.map(n=>(((by[n]||{}).periods||{})[key]||{}).net_usd||0);
   const chart=`<div class="glass board-chart"><canvas data-names="${esc(JSON.stringify(names))}" data-vals="${esc(JSON.stringify(vals))}"></canvas></div>`;
   return`<section><h2>${title}</h2><p class=muted>${sub}</p>${names.length?chart:""}<div class="glass tw"><table class=tbl><thead><tr><th>#</th><th>Caller</th><th>Net</th><th class=hide-m>Won</th><th class=hide-m>Lost</th><th>W / L</th><th></th></tr></thead><tbody>${rows||`<tr><td colspan=7 class=muted>No realized trades yet</td></tr>`}</tbody></table></div></section>`}

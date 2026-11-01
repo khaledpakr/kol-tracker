@@ -22,9 +22,9 @@ USDC = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
 USDT = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
 IGNORE = {WSOL, USDC, USDT}
 RPCS = ["https://api.mainnet-beta.solana.com", "https://solana-rpc.publicnode.com"]
-BUDGET = float(os.environ.get("CT_PNL_BUDGET", "150"))
-TX_CAP = int(os.environ.get("CT_PNL_TX_CAP", "120"))
-PAGE = int(os.environ.get("CT_PNL_PAGE", "40"))
+BUDGET = float(os.environ.get("CT_PNL_BUDGET", "200"))
+TX_CAP = int(os.environ.get("CT_PNL_TX_CAP", "500"))
+PAGE = int(os.environ.get("CT_PNL_PAGE", "80"))
 T0 = time.time()
 
 def load_json(path, default):
@@ -44,18 +44,22 @@ def callers():
 
 def rpc(method, params):
     payload = json.dumps({"jsonrpc": "2.0", "id": 1, "method": method, "params": params}).encode()
-    for attempt in range(5):
+    for attempt in range(6):
         if time.time() - T0 > BUDGET:
             return None
         url = RPCS[attempt % len(RPCS)]
         try:
             req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
-            body = json.load(urllib.request.urlopen(req, timeout=20))
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                body = json.load(resp)
             if "error" in body:
                 raise RuntimeError(body["error"])
             return body["result"]
-        except Exception:
-            time.sleep(0.4 * (attempt + 1))
+        except Exception as ex:
+            wait = 0.6 * (attempt + 1)
+            if "429" in str(ex):
+                wait = 1.2 * (attempt + 1)
+            time.sleep(wait)
     return None
 
 def signatures(addr, cap, until=None, before=None):
@@ -107,12 +111,16 @@ def parse_swap(tx, owner):
         if mint in IGNORE:
             continue
         delta = d["post"] - d["pre"]
-        if abs(delta) < 1e-9:
+        if abs(delta) < 1e-6:
             continue
-        moved.append((mint, delta))
-    if len(moved) != 1:
+        moved.append((abs(delta), mint, delta))
+    if not moved:
         return None
-    mint, delta = moved[0]
+    moved.sort(reverse=True)
+    # A routed swap can nudge dust balances. Keep it only when one mint dominates.
+    if len(moved) > 1 and moved[1][0] > 0 and moved[0][0] < moved[1][0] * 25:
+        return None
+    _, mint, delta = moved[0]
     sol_swap = delta > 0 and sol < -0.001 or delta < 0 and sol > 0.0005
     usdc_swap = delta > 0 and usdc < -0.5 or delta < 0 and usdc > 0.5
     if sol_swap and usdc_swap:
@@ -259,6 +267,187 @@ def take(state, name, addr, infos, fetched):
             known.add(sig)
     return done
 
+def page_success(addr, want, stop_before_time=None, max_pages=25, before=None):
+    """Newest-first non-error signatures, paging through failed spam."""
+    out = []
+    for _ in range(max_pages):
+        if len(out) >= want or time.time() - T0 > BUDGET:
+            break
+        opts = {"limit": 1000}
+        if before:
+            opts["before"] = before
+        page = rpc("getSignaturesForAddress", [addr, opts])
+        if not page:
+            break
+        halt = False
+        for info in page:
+            bt = info.get("blockTime") or 0
+            if stop_before_time and bt and bt < stop_before_time:
+                halt = True
+                break
+            if not info.get("err"):
+                out.append(info)
+                if len(out) >= want:
+                    halt = True
+                    break
+        before = page[-1]["signature"]
+        if halt or len(page) < 1000:
+            break
+    return out
+
+def fetch_swaps(state, name, addr, infos):
+    """Download and parse signature infos. Returns how many transactions were fetched."""
+    seen = state.setdefault("seen", {}).setdefault(name, {})
+    swaps = state.setdefault("swaps", [])
+    known = {s["sig"] for s in swaps}
+    todo = [i for i in infos if not seen.get(i["signature"]) and not i.get("err")]
+    n = 0
+    for info in todo:
+        if time.time() - T0 > BUDGET:
+            break
+        sig = info["signature"]
+        tx = rpc("getTransaction", [sig, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 1}])
+        n += 1
+        if tx is None:
+            continue
+        seen[sig] = 1
+        swap = parse_swap(tx, addr)
+        if swap and sig not in known:
+            swap.update(wallet=name, sig=sig, time=info.get("blockTime") or 0)
+            swaps.append(swap)
+            known.add(sig)
+    for info in infos:
+        if info.get("err"):
+            seen[info["signature"]] = 1
+    return n
+
+def collect_window(addr):
+    """Non-error signatures spread across the last 30 Riyadh days, with a higher cap on the last 3."""
+    now = datetime.now(RIYADH)
+    day0 = datetime(now.year, now.month, now.day, tzinfo=RIYADH)
+    caps = []
+    for i in range(30):
+        start = day0 - timedelta(days=i)
+        caps.append((start.timestamp(), (start + timedelta(days=1)).timestamp(), 45 if i < 3 else 6))
+    pre_floor = (day0 - timedelta(days=45)).timestamp()
+    buckets = {i: [] for i in range(30)}
+    pre = []
+    before = None
+    for _ in range(70):
+        if time.time() - T0 > BUDGET:
+            break
+        opts = {"limit": 1000}
+        if before:
+            opts["before"] = before
+        page = rpc("getSignaturesForAddress", [addr, opts])
+        if not page:
+            break
+        for info in page:
+            if info.get("err"):
+                continue
+            bt = info.get("blockTime") or 0
+            placed = False
+            for i, (a, b, cap) in enumerate(caps):
+                if a <= bt < b and len(buckets[i]) < cap:
+                    buckets[i].append(info)
+                    placed = True
+                    break
+            if not placed and pre_floor <= bt < caps[-1][0] and len(pre) < 25:
+                pre.append(info)
+        before = page[-1]["signature"]
+        oldest = page[-1].get("blockTime") or 0
+        three_full = all(len(buckets[i]) >= caps[i][2] for i in range(3))
+        if oldest and oldest < pre_floor:
+            break
+        if len(page) < 1000:
+            break
+        if three_full and oldest < caps[-1][0] and len(pre) >= 25:
+            break
+    out = []
+    for i in range(30):
+        out.extend(buckets[i])
+    out.extend(pre)
+    return out
+
+def scan_signers(state, name, addr, max_fetch=80):
+    """Page history and keep only transactions this wallet signed that are SOL or USDC swaps."""
+    now = datetime.now(RIYADH)
+    day0 = datetime(now.year, now.month, now.day, tzinfo=RIYADH)
+    seen = state.setdefault("seen", {}).setdefault(name, {})
+    swaps = state.setdefault("swaps", [])
+    known = {s["sig"] for s in swaps}
+    counts = {}
+    before = None
+    fetched = found = 0
+    for page_i in range(60):
+        if time.time() - T0 > BUDGET:
+            break
+        opts = {"limit": 1000}
+        if before:
+            opts["before"] = before
+        page = rpc("getSignaturesForAddress", [addr, opts])
+        if not page:
+            break
+        if fetched >= max_fetch:
+            break
+        for info in page:
+            if time.time() - T0 > BUDGET or fetched >= max_fetch:
+                break
+            sig = info["signature"]
+            if info.get("err") or seen.get(sig):
+                continue
+            tx = rpc("getTransaction", [sig, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 1}])
+            fetched += 1
+            if tx is None:
+                continue
+            seen[sig] = 1
+            keys = tx["transaction"]["message"]["accountKeys"]
+            if not any(isinstance(k, dict) and k.get("pubkey") == addr and k.get("signer") for k in keys):
+                continue
+            swap = parse_swap(tx, addr)
+            if not swap or not info.get("blockTime"):
+                continue
+            age = (day0.date() - datetime.fromtimestamp(info["blockTime"], RIYADH).date()).days
+            if age < 0:
+                continue
+            cap = 18 if age < 3 else (5 if age < 30 else 0)
+            if cap == 0 or counts.get(age, 0) >= cap:
+                continue
+            swap.update(wallet=name, sig=sig, time=info["blockTime"])
+            if sig not in known:
+                swaps.append(swap)
+                known.add(sig)
+                counts[age] = counts.get(age, 0) + 1
+                found += 1
+        before = page[-1]["signature"]
+        oldest = page[-1].get("blockTime") or 0
+        if oldest and (day0.date() - datetime.fromtimestamp(oldest, RIYADH).date()).days >= 30:
+            break
+        if len(page) < 1000:
+            break
+    print(name, "scan fetched", fetched, "new swaps", found, "days", dict(sorted(counts.items())), flush=True)
+    return fetched
+
+def backfill(state, people):
+    """Download signed SOL/USDC swaps, preferring the last 3 Riyadh days and then the last 30."""
+    fetched = 0
+    for person in people:
+        if time.time() - T0 > BUDGET:
+            break
+        name, addr = person["name"], person["address"]
+        n = scan_signers(state, name, addr)
+        fetched += n
+        mine = [s for s in state.get("swaps") or [] if s["wallet"] == name and s.get("time")]
+        cur = state.setdefault("cursors", {}).setdefault(name, {})
+        if mine:
+            cur["oldest_time"] = min(s["time"] for s in mine)
+            cur["newest_time"] = max(s["time"] for s in mine)
+        cur["reached_cutoff"] = bool(mine) and cur.get("oldest_time", 10**12) <= time.time() - 3 * 86400
+        print(name, "fetched", n, "swaps", len(mine), flush=True)
+        save_json(STATE_PATH, state)
+    print("backfill fetched", fetched, "swaps", len(state.get("swaps") or []))
+    return state
+
 def ingest(state, people):
     cursors = state.setdefault("cursors", {})
     fetched = [0]
@@ -270,7 +459,7 @@ def ingest(state, people):
         name, addr = person["name"], person["address"]
         cur = cursors.setdefault(name, {"before": None, "reached_cutoff": False, "oldest_time": None})
         # Recent signatures. `before` walks toward older history; already-seen sigs are cheap.
-        newer = signatures(addr, per, before=None)
+        newer = page_success(addr, per, max_pages=12)
         done = take(state, name, addr, newer, fetched)
         if done:
             cur["before"] = done[-1]["signature"]
@@ -379,7 +568,14 @@ def main():
     people = callers()
     state = load_json(STATE_PATH, {"seen": {}, "swaps": [], "cursors": {}})
     try:
-        ingest(state, people)
+        if os.environ.get("CT_PNL_BACKFILL"):
+            backfill(state, people)
+        else:
+            cap = int(os.environ.get("CT_PNL_MAX_FETCH", "40"))
+            for person in people:
+                if time.time() - T0 > BUDGET:
+                    break
+                scan_signers(state, person["name"], person["address"], max_fetch=cap)
     finally:
         save_json(STATE_PATH, state)
     publish(state, people, sol_price())

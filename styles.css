@@ -41,6 +41,7 @@ h2{font-size:26px;margin:0 0 12px;display:block;background:linear-gradient(90deg
 .pnl-card{padding:16px;transition:.25s}.pnl-card:hover{transform:translateY(-4px);border-color:var(--gold)}
 .pnl-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .pnl-big{font-size:clamp(30px,4vw,42px);font-weight:900;letter-spacing:-.03em;line-height:1;margin-top:12px}
+.pnl-line{display:block;line-height:1.3}.pnl-none{margin-top:18px;font-size:22px;font-weight:800;color:var(--mu)}
 .pnl-sol{font-weight:700;margin-bottom:6px}
 .thumb,.board-chart{height:64px;margin-top:8px;overflow:hidden}
 .thumb canvas,.board-chart canvas{width:100%!important;height:64px!important}
