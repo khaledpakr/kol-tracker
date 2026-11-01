@@ -42,7 +42,7 @@ home(){const o=F.totals;return`${tokenBlock()}${pnlHome()}<section><div class=st
 <section><h2>🏆 ${t("lb")}</h2>${lbTable()}</section>
 <section><h2>👥 ${t("callers")}</h2><div class=cards>${F.callers.map(callerCard).join("")}</div></section>
 <section id=coinsec>${coinsBlock()}</section>`},
-feed(){const l=F.trades.filter(x=>filt=="ALL"||x.side==filt||x.wallet==filt);return`<section><h2>⚡ ${t("nav_feed")}</h2><div class=filters>${["ALL","BUY","SELL",...F.callers.map(c=>c.name)].map(f=>`<button class="${f==filt?"on":""}" onclick="filt='${f}';render()">${f=="ALL"?t("all_c"):f=="BUY"?t("buys"):f=="SELL"?t("sells"):f}</button>`).join("")}</div><div class="glass tw"><table class=tbl>${tradeHead()}<tbody>${tradeRows(l.slice(0,200))}</tbody></table></div></section>`},
+feed(){const l=F.trades.filter(x=>filt=="ALL"||x.side==filt||x.wallet==filt);return`${tokenBlock()}<section><h2>⚡ ${t("nav_feed")}</h2><div class=filters>${["ALL","BUY","SELL",...F.callers.map(c=>c.name)].map(f=>`<button class="${f==filt?"on":""}" onclick="filt='${f}';render()">${f=="ALL"?t("all_c"):f=="BUY"?t("buys"):f=="SELL"?t("sells"):f}</button>`).join("")}</div><div class="glass tw"><table class=tbl>${tradeHead()}<tbody>${tradeRows(l.slice(0,200))}</tbody></table></div></section>`},
 leaderboard(){return`${pnlBoards()}<section><h2>🏆 ${t("lb")}</h2><p class=muted>${t("lb_sub")}</p>${lbTable()}</section>`},
 pnl(){return pnlHome()+pnlBoards()},
 coins(){return`<section id=coinsec>${coinsBlock()}</section>`},
@@ -121,9 +121,10 @@ function drawCharts(){
 }
 function render(){killCharts();document.documentElement.lang="en";document.documentElement.dir="ltr";
 document.querySelectorAll("[data-i]").forEach(e=>e.textContent=t(e.dataset.i));const [,r="",a]=location.hash.split("/");
-document.querySelectorAll("nav a").forEach(e=>e.classList.toggle("on",e.getAttribute("href")=="#/"+r));
+const route=r===""?"feed":r;
+document.querySelectorAll("nav a").forEach(e=>{const href=e.getAttribute("href");e.classList.toggle("on",href==="#/"?(r===""||r==="feed"):href==="#/"+r)});
 if(!F){$("#app").innerHTML=`<p class=muted style="padding:60px;text-align:center">${t("loading")}</p>`;return}
-const y=scrollY;$("#app").innerHTML=(V[r]||V.home)(decodeURIComponent(a||""));scrollTo(0,y);requestAnimationFrame(drawCharts)}
+const y=scrollY;$("#app").innerHTML=(V[route]||V.feed)(decodeURIComponent(a||""));scrollTo(0,y);requestAnimationFrame(drawCharts)}
 
 addEventListener("hashchange",()=>{render();scrollTo(0,0);});
 async function countVisit(){
