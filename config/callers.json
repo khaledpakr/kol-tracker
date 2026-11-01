@@ -1,0 +1,18 @@
+{
+  "source": "The first five wallets are the ones this tracker already followed. The next five are the highest 30-day realized-PnL names on the public kolscan.io leaderboard (page fetched 2026-11-01) who were not already tracked. cupsey, bestcook, and thedetective are excluded. X links are the ones kolscan published; callers missing from that board keep a search link.",
+  "sol_mint": "So11111111111111111111111111111111111111112",
+  "usdc_mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+  "usdc_note": "Circle's published Solana USDC mint. A lookalike string that does not match Circle's address is not treated as USDC.",
+  "callers": [
+    {"name": "slingoor", "address": "5YRgrP3mjGzrzirYYN5HAQH19cTYREYwGxW6XRJQUzij", "x": "https://x.com/slingoorio", "source": "Existing tracker wallet. kolscan.io 30-day leaderboard also lists this address."},
+    {"name": "Gfree", "address": "4yo9CUuTBbds9NFhZd4MzPiZZkUvveXdTnAH8qMsE8ku", "x": "https://x.com/G_free9", "source": "Existing tracker wallet. kolscan.io lists the same address with this X link."},
+    {"name": "POORGOAT___", "address": "8k1sAmVUjzaZkxqexeYkCPphjcQobYugQeGmCyvKtHNG", "x": "https://x.com/search?q=POORGOAT___", "source": "Existing tracker wallet."},
+    {"name": "marcell", "address": "6vbrTLsWy76TxDQAUKLqZrPohQuq6EVaJgfGzR82paFa", "x": "https://x.com/search?q=marcell", "source": "Existing tracker wallet."},
+    {"name": "cwuhn4", "address": "CwUHN4zTn5wiEYoZjsP4FrDvAT9heDWewCTQjhgwhJqS", "x": "https://x.com/search?q=cwuhn4", "source": "Existing tracker wallet."},
+    {"name": "zeropnl", "address": "4xY9T1Q7foJzJsJ6YZDSsfp9zkzeZsXnxd45SixduMmr", "x": "https://x.com/im0pnl", "source": "kolscan.io 30-day leaderboard, rank 2 on 2026-11-01, about +3507 SOL realized."},
+    {"name": "decu", "address": "4vw54BmAogeRV3vPKWyFet5yf8DTLcREzdSzx4rw9Ud9", "x": "https://x.com/notdecu", "source": "kolscan.io 30-day leaderboard, rank 3 on 2026-11-01, about +3376 SOL realized."},
+    {"name": "Cented", "address": "CyaE1VxvBrahnPWkqm5VsdCvyS2QmNht2UFrKJHga54o", "x": "https://x.com/Cented7", "source": "kolscan.io 30-day leaderboard, rank 4 on 2026-11-01, about +2471 SOL realized."},
+    {"name": "trunoest", "address": "ardinRsN1mNYVeoJWTBsWeYeXvuR9UUDGMsCDKpb6AT", "x": "https://x.com/trunoest", "source": "kolscan.io 30-day leaderboard, rank 5 on 2026-11-01, about +1598 SOL realized."},
+    {"name": "theo", "address": "Bi4rd5FH5bYEN8scZ7wevxNZyNmKHdaBcvewdPFxYdLt", "x": "https://x.com/theonomix", "source": "kolscan.io 30-day leaderboard, rank 6 on 2026-11-01, about +1561 SOL realized."}
+  ]
+}
