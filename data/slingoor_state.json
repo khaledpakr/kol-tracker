@@ -1,7 +1,7 @@
 {
  "slingoor": {
   "address": "5YRgrP3mjGzrzirYYN5HAQH19cTYREYwGxW6XRJQUzij",
-  "last_sig": "3tJ2xDe9ZWGxpiaR3AZ1j5HWsLqVKWj5yLpUxF6UivjN6m7hBKXEtMm2fy2v8Vor8T7aUADBxTgPrUHwwFanSU2g",
+  "last_sig": "bHE7ACYpc4V97DCqSUsknpCZy4guU2WJQEZ1brhLUrUeueugB48kfuuW8JrNKUkSQ5r733BtLBNQ7ub7Wv86WFk",
   "positions": {
    "BL5VzSWV8LuaXMRCXDhsNjJg8uMCCf8H64F3SsDzpump": {
     "tokens": 3446878.583509,
@@ -514,7 +514,7 @@
  },
  "POORGOAT___": {
   "address": "8k1sAmVUjzaZkxqexeYkCPphjcQobYugQeGmCyvKtHNG",
-  "last_sig": "5nTdNEeT975UvGCmVh3jhPmGt92vt1kwkRTYPck5yhrNZg61MQzo5TrVYn5TfWxe7QH7kpiyiUsq71bnwkMqoWiw",
+  "last_sig": "5sXM7ijpAkNuXqq64FYEAJbaYRHmaY9cXe7uAynR3JeMBQw3YGSRbp1ske4rhRXonvwRt2kqoq1Z8kCmzp83UuHZ",
   "positions": {
    "APLPiTjBWzwfZ5U1TBeqLF9XJ7dV7XKGe7j4BZhkDray": {
     "tokens": 9440016.053888,
@@ -539,7 +539,7 @@
  },
  "marcell": {
   "address": "6vbrTLsWy76TxDQAUKLqZrPohQuq6EVaJgfGzR82paFa",
-  "last_sig": "66iP2mjacVwtpDExmwQHxE7mx4Cj9sYnbZSXJgdr7oFyTYxWCYwpkLJxEv6WT1aKy15hjXM1hkg5vbWK8YepghXt",
+  "last_sig": "3rykKK5C5MBaHXPsMPLWwSGaX1Gwyqvfdg9e8hZqkDakvKvcuYETyAaA33fFyTermNf53xR3pfJD3PwokkeBLNPZ",
   "positions": {},
   "baseline_at": 1793460980
  },
