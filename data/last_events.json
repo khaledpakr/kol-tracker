@@ -1,72 +1,15 @@
 [
  {
-  "type": "SELL",
-  "mint": "2hmeDg5rp6FXm3NWo7mmf4x1JVZXSQYfM5TvbwS4pump",
-  "tokens": 27510886.448777,
-  "sol": 0.921484801,
-  "pre": 27510886.448777,
-  "post": 0.0,
-  "wallet": "Gfree",
-  "sig": "5ao79ARdRaM4W4GHVxnYPbmmLs4t1SURPiTnMNTpJ1aQySh1CXv3PZPzcGxWWJyDf272Tdtcvr1oVuzPYeVX6VKc",
-  "time": 1793547144,
-  "pct_sold": 100.0
+  "wallet": "cwuhn4",
+  "error": "time_budget_skipped"
  },
  {
-  "type": "BUY",
-  "mint": "2hmeDg5rp6FXm3NWo7mmf4x1JVZXSQYfM5TvbwS4pump",
-  "tokens": 27510886.448777,
-  "sol": 1.00551884,
-  "pre": 0,
-  "post": 27510886.448777,
-  "wallet": "Gfree",
-  "sig": "3PxLo11kptrFhsLMhHsMdpZYbQxA1MvbwmUKs4vTGT78nMknajQmb19cpKQShLCL9dAPQiEHZgvCGw6e4DCW7wQU",
-  "time": 1793547113
- },
- {
-  "type": "SELL",
-  "mint": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",
-  "tokens": 0.00060622,
-  "sol": 0.493971956,
-  "pre": 0.00060622,
-  "post": 0.0,
   "wallet": "zeropnl",
-  "sig": "3V3PqJff7Hv7YCrYi8i4ZGrLt8Lh1mw2rFkj7GrGGvfWPZn38WVNchHic83nfEK2iF1YbtiigFD3qgfN5bz9wr5k",
-  "time": 1793557352,
-  "pct_sold": 100.0
+  "error": "time_budget_skipped"
  },
  {
-  "type": "SELL",
-  "mint": "2pQaBDUShbSsxy1Ynv783anwCzMMyE27hZ3L81qepump",
-  "tokens": 121592754.829052,
-  "sol": 6.670258754,
-  "pre": 121592754.829052,
-  "post": 0.0,
-  "wallet": "zeropnl",
-  "sig": "5U3yXceNzDVV3vnPX9sUvHNviayfrSYmFWep8iLFvZoC9KdZcQkfmHGnVnTSup7WUur9UFEcv1jhoCtpezCzzZiX",
-  "time": 1793557172,
-  "pct_sold": 100.0
- },
- {
-  "type": "BUY",
-  "mint": "2pQaBDUShbSsxy1Ynv783anwCzMMyE27hZ3L81qepump",
-  "tokens": 121592754.829052,
-  "sol": 5.00300728,
-  "pre": 0,
-  "post": 121592754.829052,
-  "wallet": "zeropnl",
-  "sig": "5HvoxZamXzCThRbf6wuFy8mpsNA8cbZGtwFqKqeQhz7skWUbopjr2RzAqgrFSop882JhKNHAYLks3sHPC1Jn4Ch1",
-  "time": 1793557169
- },
- {
-  "type": "BUY",
-  "mint": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",
-  "tokens": 0.00060622,
-  "sol": 5.00300728,
-  "pre": 0,
-  "post": 0.00060622,
-  "wallet": "zeropnl",
-  "sig": "5HvoxZamXzCThRbf6wuFy8mpsNA8cbZGtwFqKqeQhz7skWUbopjr2RzAqgrFSop882JhKNHAYLks3sHPC1Jn4Ch1",
-  "time": 1793557169
+  "wallet": "decu",
+  "error": "time_budget_skipped"
  },
  {
   "wallet": "Cented",
