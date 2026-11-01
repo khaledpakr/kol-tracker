@@ -2,7 +2,7 @@ name: Update feed
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -16,6 +16,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,6 +33,10 @@ jobs:
         continue-on-error: true
         env:
           CT_STATE: data/slingoor_state.json
+          CT_BUDGET: "150"
+          CT_MAX_PAGES: "16"
+          CT_TX_CAP: "18"
+          CT_LOOKBACK: "21600"
         run: python scripts/copytrade.py > data/last_events.json
 
       - name: Build feed
@@ -40,8 +45,8 @@ jobs:
       - name: Build realized PnL
         continue-on-error: true
         env:
-          CT_PNL_BUDGET: "180"
-          CT_PNL_MAX_FETCH: "40"
+          CT_PNL_BUDGET: "120"
+          CT_PNL_MAX_FETCH: "12"
         run: python scripts/build_pnl.py
 
       - name: Commit and push data changes

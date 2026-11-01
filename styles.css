@@ -49,6 +49,9 @@ h2{font-size:26px;margin:0 0 12px;display:block;background:linear-gradient(90deg
 .kolt-ca .mint{min-width:0;flex:1 1 auto;font-size:12px;color:var(--gold2)}
 .kolt-links{display:flex;gap:8px;flex:none;flex-wrap:wrap}
 .kolt-links .btn{padding:8px 12px;border-radius:10px;font-size:13px;font-weight:700}
+.kolt-ref{flex:1 0 100%;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--mu)}
+.kolt-ref b{color:var(--gold2);font-family:ui-monospace,SFMono-Regular,monospace;font-weight:700}
+.kolt-ref .btn{padding:6px 10px;border-radius:10px;font-size:12px;font-weight:700}
 .pnl-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap}
 .pnl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .pnl-card{padding:16px;transition:.25s}.pnl-card:hover{transform:translateY(-4px);border-color:var(--gold)}

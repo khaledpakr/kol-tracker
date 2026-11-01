@@ -21,7 +21,7 @@ WSOL = "So11111111111111111111111111111111111111112"
 USDC = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
 USDT = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
 IGNORE = {WSOL, USDC, USDT}
-RPCS = ["https://api.mainnet-beta.solana.com", "https://solana-rpc.publicnode.com"]
+RPCS = ["https://api.mainnet-beta.solana.com"]
 BUDGET = float(os.environ.get("CT_PNL_BUDGET", "200"))
 TX_CAP = int(os.environ.get("CT_PNL_TX_CAP", "500"))
 PAGE = int(os.environ.get("CT_PNL_PAGE", "80"))
@@ -370,29 +370,21 @@ def collect_window(addr):
     return out
 
 def scan_signers(state, name, addr, max_fetch=80):
-    """Page history and keep only transactions this wallet signed that are SOL or USDC swaps."""
+    """Page past failed spam. A short pass from the chain tip keeps new swaps, then the saved cursor walks older history."""
     now = datetime.now(RIYADH)
     day0 = datetime(now.year, now.month, now.day, tzinfo=RIYADH)
     seen = state.setdefault("seen", {}).setdefault(name, {})
     swaps = state.setdefault("swaps", [])
     known = {s["sig"] for s in swaps}
+    cur = state.setdefault("cursors", {}).setdefault(name, {})
     counts = {}
-    before = None
     fetched = found = 0
-    for page_i in range(60):
-        if time.time() - T0 > BUDGET:
-            break
-        opts = {"limit": 1000}
-        if before:
-            opts["before"] = before
-        page = rpc("getSignaturesForAddress", [addr, opts])
-        if not page:
-            break
-        if fetched >= max_fetch:
-            break
+
+    def consume(page, limit):
+        nonlocal fetched, found
         for info in page:
-            if time.time() - T0 > BUDGET or fetched >= max_fetch:
-                break
+            if time.time() - T0 > BUDGET or fetched >= limit:
+                return
             sig = info["signature"]
             if info.get("err") or seen.get(sig):
                 continue
@@ -401,9 +393,6 @@ def scan_signers(state, name, addr, max_fetch=80):
             if tx is None:
                 continue
             seen[sig] = 1
-            keys = tx["transaction"]["message"]["accountKeys"]
-            if not any(isinstance(k, dict) and k.get("pubkey") == addr and k.get("signer") for k in keys):
-                continue
             swap = parse_swap(tx, addr)
             if not swap or not info.get("blockTime"):
                 continue
@@ -419,12 +408,46 @@ def scan_signers(state, name, addr, max_fetch=80):
                 known.add(sig)
                 counts[age] = counts.get(age, 0) + 1
                 found += 1
-        before = page[-1]["signature"]
-        oldest = page[-1].get("blockTime") or 0
-        if oldest and (day0.date() - datetime.fromtimestamp(oldest, RIYADH).date()).days >= 30:
+
+    before = None
+    tip_limit = max(4, max_fetch // 2)
+    for _ in range(3):
+        if fetched >= tip_limit or time.time() - T0 > BUDGET:
             break
+        opts = {"limit": 1000}
+        if before:
+            opts["before"] = before
+        page = rpc("getSignaturesForAddress", [addr, opts])
+        if not page:
+            break
+        consume(page, tip_limit)
+        before = page[-1]["signature"]
         if len(page) < 1000:
             break
+    cursor = cur.get("before")
+    for _ in range(25):
+        if fetched >= max_fetch or time.time() - T0 > BUDGET:
+            break
+        opts = {"limit": 1000}
+        if cursor:
+            opts["before"] = cursor
+        page = rpc("getSignaturesForAddress", [addr, opts])
+        if not page:
+            cur["before"] = None
+            break
+        consume(page, max_fetch)
+        cursor = page[-1]["signature"]
+        cur["before"] = cursor
+        oldest = page[-1].get("blockTime") or 0
+        if oldest and (day0.date() - datetime.fromtimestamp(oldest, RIYADH).date()).days >= 30:
+            cur["before"] = None
+            break
+        if len(page) < 1000:
+            cur["before"] = None
+            break
+    if len(seen) > 2500:
+        for key in list(seen)[:-2500]:
+            seen.pop(key, None)
     print(name, "scan fetched", fetched, "new swaps", found, "days", dict(sorted(counts.items())), flush=True)
     return fetched
 
