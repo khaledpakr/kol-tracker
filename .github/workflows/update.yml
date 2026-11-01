@@ -39,6 +39,9 @@ jobs:
 
       - name: Build realized PnL
         continue-on-error: true
+        env:
+          CT_PNL_BUDGET: "180"
+          CT_PNL_MAX_FETCH: "40"
         run: python scripts/build_pnl.py
 
       - name: Commit and push data changes
