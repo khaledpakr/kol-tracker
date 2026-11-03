@@ -1,15 +1,16 @@
 [
  {
-  "wallet": "Gfree",
-  "error": "time_budget_skipped"
- },
- {
+  "type": "BUY",
+  "quote": "USDC",
+  "mint": "J1pZjNKh4BnbXBsroE4acJv3TYzCGxTn46VrZii6orEZ",
+  "tokens": 1657613.748439001,
+  "sol": 500.010773,
+  "usdc": 500.010773,
+  "pre": 16373301.822821,
+  "post": 18030915.57126,
   "wallet": "POORGOAT___",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "marcell",
-  "error": "time_budget_skipped"
+  "sig": "44yreiJKfF4XmUAm3qjZ6coyWSYBQjK21CPSa4GrrHgMSSvAHZsbEoY57KE2RqKK9n9xBmwK5WWdvZxYHtDeg7RW",
+  "time": 1793720888
  },
  {
   "wallet": "cwuhn4",
