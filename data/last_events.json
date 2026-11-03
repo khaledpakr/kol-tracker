@@ -1,20 +1,26 @@
 [
  {
-  "type": "BUY",
-  "quote": "USDC",
-  "mint": "J1pZjNKh4BnbXBsroE4acJv3TYzCGxTn46VrZii6orEZ",
-  "tokens": 1657613.748439001,
-  "sol": 500.010773,
-  "usdc": 500.010773,
-  "pre": 16373301.822821,
-  "post": 18030915.57126,
-  "wallet": "POORGOAT___",
-  "sig": "44yreiJKfF4XmUAm3qjZ6coyWSYBQjK21CPSa4GrrHgMSSvAHZsbEoY57KE2RqKK9n9xBmwK5WWdvZxYHtDeg7RW",
-  "time": 1793720888
+  "type": "SELL",
+  "mint": "C4TUme23PA5eqzw1Y8bAYUThnNShpDDXAxSdLmFppump",
+  "tokens": 24896769.960263,
+  "sol": 2.172027782,
+  "pre": 24896769.960263,
+  "post": 0.0,
+  "wallet": "Gfree",
+  "sig": "48D71GY4hetn8qDKJVbS1yuG8zE2n9MduD839oNgnJ19Eq8fWDYdbvvuTna5rJpeWwJzS7zmZmmsitc7QD683agi",
+  "time": 1793740904,
+  "pct_sold": 100.0
  },
  {
-  "wallet": "cwuhn4",
-  "error": "time_budget_skipped"
+  "type": "BUY",
+  "mint": "C4TUme23PA5eqzw1Y8bAYUThnNShpDDXAxSdLmFppump",
+  "tokens": 24896769.960263,
+  "sol": 1.60551884,
+  "pre": 0,
+  "post": 24896769.960263,
+  "wallet": "Gfree",
+  "sig": "5qiA1Yj7XBpCe9aihpyfv968kx9G9qsjuDCCar8cQwvTUeJr9Q23HLygagJpuCCd7YM2NrQbCc2zhNLZgq2x5ZiE",
+  "time": 1793740849
  },
  {
   "wallet": "zeropnl",
