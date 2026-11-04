@@ -41,6 +41,7 @@ h2{font-size:26px;margin:0 0 12px;display:block;background:linear-gradient(90deg
 .rank{font-weight:800;width:28px}.r1,.r2,.r3{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;color:#1a1404;background:linear-gradient(145deg,#fff6d0,#d4af37 55%,#8a6a1f);box-shadow:0 0 0 1px rgba(255,255,255,.25)}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.filters button{background:transparent;border:1px solid var(--bd);color:var(--mu);border-radius:10px;padding:7px 12px;cursor:pointer;font-family:inherit;transition:.2s}.filters button.on,.filters button:hover{color:#1a1404;background:linear-gradient(135deg,#f3e5ab,#d4af37);border-color:transparent}
 .note{font-size:12px;color:var(--mu);padding:10px 14px;border-inline-start:3px solid var(--gold);background:rgba(212,175,55,.06);border-radius:8px;margin-top:10px}
+.kolt-slot{max-width:1200px;margin:0 auto;padding:8px 16px 0}
 .kolt-wrap{margin:10px 0 0}
 .kolt{display:flex;align-items:center;gap:12px 16px;padding:12px 16px;flex-wrap:wrap}
 .kolt-id{display:flex;align-items:center;gap:8px;flex:none}

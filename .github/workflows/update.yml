@@ -2,8 +2,8 @@ name: Update feed
 
 on:
   schedule:
-    # Offset from the top of the hour. GitHub drops scheduled runs under load at :00.
-    - cron: '3-58/5 * * * *'
+    # Every 10 minutes, off the top of the hour so GitHub is less likely to drop the run.
+    - cron: '8,18,28,38,48,58 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
