@@ -673,7 +673,25 @@
    "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",
-   "5parh8FTeqpfVe4JRphMPdNfaWUJAUnidXB3hxDzZijuK4kccZ4HZZQdCud5kGFNmwv1AnzFkG2oYvT9dAuRZXjA"
+   "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"
   ]
  },
  "thedetective": {
@@ -896,6 +914,12 @@
     "sol": 1.091891326,
     "entry_time": 1793652653,
     "held_before": 21948318.277586
+   },
+   "AjZ8JFAvMAdrRFG4yfuozGBnpEM4DKPg1JV5nuNqpump": {
+    "tokens": 339707.9233890027,
+    "sol": 100.14548100000047,
+    "entry_time": 1793822521,
+    "held_before": 22073531.581251
    }
   },
   "baseline_at": 1793460980,
@@ -1115,7 +1139,10 @@
    "tmjwutkD5grLBU6XtKH6ckUHpd3qA22Q24iUpQ9wRVAEX85CV13GqcDaD43GLzLKR1fZvf7jTn9mFZkrgRA4hAK",
    "5Y1aiYSoD2RK1YTaPd8QRxXLLHiCn58fDsmxBtrbSohB3EbBrgJzRbEAAtYXcmXf9wAqx7TvFca9byx71AYwM52V",
    "4Uqy216bH8cPEjds3ZcFXhR6V9sG2a98woq1sQvUumcHGLHkQQBNtHDGehSNQs8G5Y6AxTxM7TAj9ReGxvkLmeKM",
-   "47kpWDjghJHWMVUGm49QXJXwhpFkDLudJhoyzw5bfXLFqdiFFfsysQ2LPi7s7wGLPferZ1eX9V5EVsd5yn8F6bE4"
+   "47kpWDjghJHWMVUGm49QXJXwhpFkDLudJhoyzw5bfXLFqdiFFfsysQ2LPi7s7wGLPferZ1eX9V5EVsd5yn8F6bE4",
+   "1LbggkTifqyRNN7s9CfMFbxcqe6ornDp6TjavgFEE9iGEXoWsisXezH18MVmeTSvah9vHLNNxWYo3sxxkkHcYzh",
+   "3bG4XycGvAjgZXS6fY1SGRuQrmKU8q9njUZ4XxS3fdhvE5YFKFm82v6mwMsFMbdirWuc6ZKJiwz8WQdffFHujAZu",
+   "3BZtzLXJyoto9Ppac9z9GoxZDKRdPvVRQZpv5mongApQ6w3LvcTje8uR99mAKREbdV5qPbtxhtdCFHU1pK2m4Fvr"
   ]
  },
  "marcell": {
