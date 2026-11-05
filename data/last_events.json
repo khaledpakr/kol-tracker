@@ -1,16 +1,7 @@
 [
  {
-  "type": "BUY",
-  "quote": "USDC",
-  "mint": "AjZ8JFAvMAdrRFG4yfuozGBnpEM4DKPg1JV5nuNqpump",
-  "tokens": 339707.9233890027,
-  "sol": 100.14548100000047,
-  "usdc": 100.14548100000047,
-  "pre": 22073531.581251,
-  "post": 22413239.50464,
   "wallet": "POORGOAT___",
-  "sig": "3bG4XycGvAjgZXS6fY1SGRuQrmKU8q9njUZ4XxS3fdhvE5YFKFm82v6mwMsFMbdirWuc6ZKJiwz8WQdffFHujAZu",
-  "time": 1793822521
+  "error": "time_budget_skipped"
  },
  {
   "wallet": "marcell",
