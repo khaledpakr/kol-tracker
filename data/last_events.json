@@ -1,11 +1,14 @@
 [
  {
-  "wallet": "POORGOAT___",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "marcell",
-  "error": "time_budget_skipped"
+  "type": "BUY",
+  "mint": "CCuV18aTvSXDfAYs9XZx6wmGMvPr34EqmQt8exMVcr8n",
+  "tokens": 23949543.785562,
+  "sol": 2.45551884,
+  "pre": 0,
+  "post": 23949543.785562,
+  "wallet": "Gfree",
+  "sig": "61cZ1miQeW6rgXSCZ68SCRW81AQui6132Zwi1e81njurKLY8oH6UnmTReXmLDAJjHJhNBWx9LUaHQuxY9Be2gfXU",
+  "time": 1794013691
  },
  {
   "wallet": "cwuhn4",
