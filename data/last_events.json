@@ -1,27 +1,179 @@
 [
  {
-  "wallet": "POORGOAT___",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "marcell",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "cwuhn4",
-  "error": "time_budget_skipped"
- },
- {
+  "type": "SELL",
+  "mint": "5PtWHui3pgY2BxvFEdwoeJWZJ3fTkHEFxQmgQExspump",
+  "tokens": 78914208.394075,
+  "sol": 5.638519138,
+  "pre": 78914208.394075,
+  "post": 0.0,
   "wallet": "zeropnl",
-  "error": "time_budget_skipped"
+  "sig": "3eKdz1zzwZbpabyq2Rzx5wrqJYsQJjpyt5QWX1Cv7bKg8fVnn6Tupny4KGSTVMARtNyS75dTJX9oFZCqqjmbVjWK",
+  "time": 1794697767,
+  "pct_sold": 100.0
  },
  {
-  "wallet": "decu",
-  "error": "time_budget_skipped"
+  "type": "BUY",
+  "quote": "USDC",
+  "mint": "5PtWHui3pgY2BxvFEdwoeJWZJ3fTkHEFxQmgQExspump",
+  "tokens": 78914208.394075,
+  "sol": 344.973779,
+  "usdc": 344.973779,
+  "pre": 0,
+  "post": 78914208.394075,
+  "wallet": "zeropnl",
+  "sig": "5beqCCmAh2kcut5v1NFdXeJNinnG3HQFRVUcT9d4XLEtK56ptuwWXCXGS8mPHTkKt9QA2BmAbizhNpW9jvc8b8cx",
+  "time": 1794697760
  },
  {
-  "wallet": "Cented",
-  "error": "time_budget_skipped"
+  "type": "SELL",
+  "mint": "4dCjRMuUS4T3M2PgiygFCpq1579XjWackzeYaeujpump",
+  "tokens": 105299675.624526,
+  "sol": 5.4367646,
+  "pre": 105299675.624526,
+  "post": 0.0,
+  "wallet": "zeropnl",
+  "sig": "4Rin1tFeoD8vcuSXmxnXgS3n6zfEtRPygUTnsZjMtcfvkjhjN7H3SGz1Shr3Cb3F7GyPfTWCVATXmvy6GqgUKPt8",
+  "time": 1794697720,
+  "pct_sold": 99.99999999999999
+ },
+ {
+  "type": "BUY",
+  "mint": "4dCjRMuUS4T3M2PgiygFCpq1579XjWackzeYaeujpump",
+  "tokens": 105299675.624526,
+  "sol": 5.00151884,
+  "pre": 0,
+  "post": 105299675.624526,
+  "wallet": "zeropnl",
+  "sig": "PA7JWN6mE9icPKErfd8TZxxBz6wBoxT4dh4Vq4B1mim9oJh7nxmG8LANsL8fYs8ybeVmiPxwV8WLVPm6RP4Ewkz",
+  "time": 1794697711
+ },
+ {
+  "type": "BUY",
+  "mint": "A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS",
+  "tokens": 0.04135178,
+  "sol": 5.00151884,
+  "pre": 0,
+  "post": 0.04135178,
+  "wallet": "zeropnl",
+  "sig": "PA7JWN6mE9icPKErfd8TZxxBz6wBoxT4dh4Vq4B1mim9oJh7nxmG8LANsL8fYs8ybeVmiPxwV8WLVPm6RP4Ewkz",
+  "time": 1794697711
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 7425591.713231981,
+  "sol": 1.501683693,
+  "pre": 140261176.805481,
+  "post": 132835585.092249,
+  "wallet": "zeropnl",
+  "sig": "4c7xqNLZRA25FZJcmG56yyT2Ld2fM16YqTaypffVj8Wt6HEfYmJs8RCFXYWjvmcCYqd2V5cyJSisDmwpJyXZbLfk",
+  "time": 1794596826,
+  "pct_sold": 5.2941176470592755,
+  "multiple": 55.55454653830488
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 8250657.459146023,
+  "sol": 1.649414575,
+  "pre": 148511834.264627,
+  "post": 140261176.805481,
+  "wallet": "zeropnl",
+  "sig": "2uCsx5xSXHCacFUNKAfiKaWNH669mugdd5EhSrkpLzcTe17w7qTCakBWSuZfg4XbGWDgY8k1AiNieVPmQ7xf4ARZ",
+  "time": 1794596826,
+  "pct_sold": 5.555555555555608,
+  "multiple": 54.917844067593876
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 8250657.459145993,
+  "sol": 1.536345031,
+  "pre": 156762491.723773,
+  "post": 148511834.264627,
+  "wallet": "zeropnl",
+  "sig": "CbHBKCTgnraXKZ36cHxdGXHa6q9LBLvjz51acB1ZSELgNtMkQEZ1aenQhYudgxrJ93H5cLKr5kySj749CG6hqGo",
+  "time": 1794596825,
+  "pct_sold": 5.263157894736871,
+  "multiple": 51.15315344323363
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 8250657.459145993,
+  "sol": 1.590769384,
+  "pre": 165013149.182919,
+  "post": 156762491.723773,
+  "wallet": "zeropnl",
+  "sig": "5TxmHoYqQDSwVtggTz8jrQxCbCwcH8Yqsvd8S9bYQZn7wX5YQ68QQq73rZK68gymfURk6zrVbJzPc2vfYqqm7izf",
+  "time": 1794596825,
+  "pct_sold": 5.000000000000026,
+  "multiple": 52.96523160528921
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 8684902.588575006,
+  "sol": 1.636945811,
+  "pre": 173698051.771494,
+  "post": 165013149.182919,
+  "wallet": "zeropnl",
+  "sig": "mLpAkxRGneyDkfrkgFGxCqGjFCe8ArZBwZnTTuwRZD7DVRhpWRcTknAeFARUxPbghy4NBRaiVfUfLGqdXU5ahxp",
+  "time": 1794596825,
+  "pct_sold": 5.000000000000176,
+  "multiple": 51.77755753480998
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 9649891.765082985,
+  "sol": 2.108191603,
+  "pre": 183347943.536577,
+  "post": 173698051.771494,
+  "wallet": "zeropnl",
+  "sig": "4D37N5rLTFBfNxqWNz5abEPFFzsMbcjcLqMw19BdoS7HKncpSEd1yX1UDYGGXvB93zCRp7idZKbwFKGHxU4yGasT",
+  "time": 1794596825,
+  "pct_sold": 5.2631578947368345,
+  "multiple": 60.01500486864058
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 9649891.765083015,
+  "sol": 2.226593766,
+  "pre": 192997835.30166,
+  "post": 183347943.536577,
+  "wallet": "zeropnl",
+  "sig": "5pfcdxDn5awZ3SuPsigRB5rwdHKeMzoSjzEbHCptmN3xAK3cUP5Tj64DhhSLi65RGeiwZ2o3NFTks1Cc8jgp1wPa",
+  "time": 1794596825,
+  "pct_sold": 5.000000000000008,
+  "multiple": 63.385621836657315
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 10157780.80535099,
+  "sol": 2.454898763,
+  "pre": 203155616.107011,
+  "post": 192997835.30166,
+  "wallet": "zeropnl",
+  "sig": "38GCYn7WqDjBR7KGeHvX5zugFiQUb8hsmAs5E9tNa2QuPhyQTRWdJv4bL9pKDD1uYdY14SZhhHuri2i5PN5z4kd5",
+  "time": 1794596824,
+  "pct_sold": 5.000000000000217,
+  "multiple": 66.39065583679063
+ },
+ {
+  "type": "SELL",
+  "mint": "GQg9n1JCVzxDkHPw2ma6xo8Q9dCTqKdC8NqkqERUpump",
+  "tokens": 10692400.847737998,
+  "sol": 2.791364391,
+  "pre": 213848016.954749,
+  "post": 203155616.107011,
+  "wallet": "zeropnl",
+  "sig": "2K8Euf9rd5ikasJJ4rJynjKZQE1aDz2Tn59N3rNBMeTBAUpUTvNMYZuRiCSPKU1eZpYt8PKPiidctPEiFHR8fYFW",
+  "time": 1794596824,
+  "pct_sold": 5.000000000000257,
+  "multiple": 71.71557932307864
  },
  {
   "wallet": "trunoest",
