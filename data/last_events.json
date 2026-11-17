@@ -1,14 +1,15 @@
 [
  {
-  "type": "BUY",
-  "mint": "ELbCDkRuUTuzPCR6CarMVtR1CYh71AzGhuZTBPePpump",
-  "tokens": 4153025.8075719997,
-  "sol": 2.103178613,
-  "pre": 23637932.539303,
-  "post": 27790958.346875,
   "wallet": "POORGOAT___",
-  "sig": "4MLs9EZXM9oKXinE8dah7xSBXB1Zf3TMKx6Mrzeta29HMpPGv6TuQrBGxEDiHcQs1uTuJJxgrpmcTAX52wJAU2a4",
-  "time": 1794792518
+  "error": "time_budget_skipped"
+ },
+ {
+  "wallet": "marcell",
+  "error": "time_budget_skipped"
+ },
+ {
+  "wallet": "cwuhn4",
+  "error": "time_budget_skipped"
  },
  {
   "wallet": "zeropnl",
