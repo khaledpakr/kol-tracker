@@ -1,19 +1,14 @@
 [
  {
-  "wallet": "POORGOAT___",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "marcell",
-  "error": "time_budget_skipped"
- },
- {
-  "wallet": "cwuhn4",
-  "error": "time_budget_skipped"
- },
- {
+  "type": "BUY",
+  "mint": "SPCXxcqXj6e5dJDVNovHN8744zkbhM2bYudU45BimGb",
+  "tokens": 0.047645,
+  "sol": 0.001590356,
+  "pre": 0,
+  "post": 0.047645,
   "wallet": "zeropnl",
-  "error": "time_budget_skipped"
+  "sig": "2kvYiv8aRYrBUTNdHH7dJYbELZYQoeLJv6kYKoGBU7D7xvrWXVW7XzCbcrnYqDwj4PcxMrRRFWARCAeuRU1q9jmc",
+  "time": 1794865163
  },
  {
   "wallet": "decu",
